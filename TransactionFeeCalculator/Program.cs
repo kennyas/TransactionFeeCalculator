@@ -27,7 +27,6 @@ namespace TransactionFeeCalculator
             string advisedTransferAmt = transferAmount.ToString();
             string debittedAmount = debitAmount.ToString();
             string charge = expectedChargeOutput.ToString();
-            //Console.Clear();
             PrintLine();
             PrintRow("Amount", "Transfer Amount", "Charge", "Debit Amount(Transfer Amount + Charge)");
             PrintLine();
@@ -97,16 +96,7 @@ namespace TransactionFeeCalculator
 
         static void PrintRow(params string[] columns)
         {
-            int width = 0;
-             
-            if(columns.Length > tableWidth)
-            {
-                width = columns.Length/2;
-            }
-            else
-            {
-                width = (tableWidth - columns.Length) / columns.Length;
-            }
+            int width = (tableWidth - columns.Length) / columns.Length;
             string row = "|";
 
             foreach (string column in columns)
@@ -123,7 +113,6 @@ namespace TransactionFeeCalculator
             {
                 width = text.Length;
             }
-            //text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
             
             if (string.IsNullOrEmpty(text))
             {
