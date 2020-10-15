@@ -27,7 +27,7 @@ namespace TransactionFeeCalculator
             string advisedTransferAmt = transferAmount.ToString();
             string debittedAmount = debitAmount.ToString();
             string charge = expectedChargeOutput.ToString();
-            Console.Clear();
+            //Console.Clear();
             PrintLine();
             PrintRow("Amount", "Transfer Amount", "Charge", "Debit Amount(Transfer Amount + Charge)");
             PrintLine();
@@ -35,12 +35,7 @@ namespace TransactionFeeCalculator
             PrintRow("", "", "", "");
             PrintLine();
             Console.ReadLine();
-
-            //Console.WriteLine("Amount: " + debitAmount);
-            //Console.WriteLine("Transfer Amount: " + inputtedAmount);
-            //Console.WriteLine("Charge : " + expectedChargeOutput);
-            //Console.WriteLine("Debit Amount(Transfer Amount + Charge) : " + debitAmount);
-            //Console.ReadKey();
+            
         }
 
         public static double CalculateTransactionFee(double preferredAmount)
@@ -102,7 +97,16 @@ namespace TransactionFeeCalculator
 
         static void PrintRow(params string[] columns)
         {
-            int width = (tableWidth - columns.Length) / columns.Length;
+            int width = 0;
+             
+            if(columns.Length > tableWidth)
+            {
+                width = columns.Length/2;
+            }
+            else
+            {
+                width = (tableWidth - columns.Length) / columns.Length;
+            }
             string row = "|";
 
             foreach (string column in columns)
@@ -115,8 +119,12 @@ namespace TransactionFeeCalculator
 
         static string AlignCentre(string text, int width)
         {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
+            if (text.Length > width)
+            {
+                width = text.Length;
+            }
+            //text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
+            
             if (string.IsNullOrEmpty(text))
             {
                 return new string(' ', width);
